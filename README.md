@@ -1,4 +1,5 @@
 # jshintrb
+[![Build Status](https://secure.travis-ci.org/stereobooster/jshintrb.png?branch=master)](http://travis-ci.org/stereobooster/jshintrb)
 
 Ruby wrapper for [JSHint](https://github.com/jshint/jshint/). The main difference from [jshint](https://github.com/liquid/jshint_on_rails) it does not depend on Java. Instead, it uses [ExecJS](https://github.com/sstephenson/execjs).
 
