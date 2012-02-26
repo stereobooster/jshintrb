@@ -10,10 +10,31 @@ module Jshintrb
     Lint.new(options).lint(source)
   end
 
-  def self.report(source, options = nil)
-    reporter = Reporter::Default
-    errors = Lint.new(options).lint(source)
-    reporter.new.format errors
+  def self.report(source, options = nil, out = nil)
+    reporter = Reporter::Default.new
+    linter = Lint.new(options)
+    report = ''
+    if source.is_a?(Array) then
+      source.each do |src|
+        if !src.is_a?(String) then
+          p src.to_s
+          raise ('Expected array of strings. Instead get ' + src.class.to_s)
+        end
+        errors = linter.lint(File.read(src))
+        rep = reporter.format errors, src
+        if out && rep.size > 0 then
+          out.puts rep
+        end
+        report += rep
+      end
+    else
+      errors = linter.lint(source)
+      report = reporter.format errors
+      if out then
+        out.puts report
+      end
+    end
+    report
   end
 
 end

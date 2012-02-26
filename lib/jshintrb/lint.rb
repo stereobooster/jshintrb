@@ -32,13 +32,15 @@ module Jshintrb
 
     def initialize(options = nil)
 
-      if options.nil? then
+      if options == :defaults then
         @options = DEFAULTS.dup
       elsif options.instance_of? Hash then
         @options = options.dup
         # @options = DEFAULTS.merge(options)
+      elsif options.nil?
+        @options = nil
       else
-        raise ArgumentError
+        raise 'Unsupported option for Jshintrb: ' + options.to_s
       end
 
       @context = ExecJS.compile(File.open(SourcePath, "r:UTF-8").read)
@@ -48,7 +50,11 @@ module Jshintrb
       source = source.respond_to?(:read) ? source.read : source.to_s
 
       js = []
-      js << "JSHINT(#{MultiJson.encode(source)}, #{MultiJson.encode(@options)});"
+      if @options.nil? then
+        js << "JSHINT(#{MultiJson.encode(source)});"
+      else
+        js << "JSHINT(#{MultiJson.encode(source)}, #{MultiJson.encode(@options)});"
+      end
       js << "return JSHINT.errors;"
 
       @context.exec js.join("\n")

@@ -11,8 +11,6 @@ task :git do
 end
 
 require "rspec/core/rake_task"
-
-desc "Run specs"
 RSpec::Core::RakeTask.new
 
 task :default => :spec
@@ -22,3 +20,9 @@ task :default => :spec
   # t.rcov = true
   # t.rcov_opts = ["--exclude", "spec"]
 # end
+
+require "./lib/jshintrb/jshinttask"
+Jshintrb::JshintTask.new :jshint do |t|
+  t.pattern = 'vendor/jshint/tests/unit/fixtures/*.js'
+  t.options = :defaults
+end

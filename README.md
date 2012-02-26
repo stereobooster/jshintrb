@@ -1,7 +1,7 @@
 # jshintrb
 [![Build Status](https://secure.travis-ci.org/stereobooster/jshintrb.png?branch=master)](http://travis-ci.org/stereobooster/jshintrb)
 
-Ruby wrapper for [JSHint](https://github.com/jshint/jshint/). The main difference from [jshint](https://github.com/liquid/jshint_on_rails) it does not depend on Java. Instead, it uses [ExecJS](https://github.com/sstephenson/execjs).
+Ruby wrapper for [JSHint](https://github.com/jshint/jshint/). The main difference from [jshint](https://github.com/liquid/jshint_on_rails) it does not depend on Java. Instead it uses [ExecJS](https://github.com/sstephenson/execjs).
 
 ## Installation
 
@@ -13,45 +13,61 @@ Ensure that your environment has a JavaScript interpreter supported by [ExecJS](
 
 ## Usage
 
-    require 'jshintrb'
+```ruby
+require 'jshintrb'
 
-    Jshintrb.lint(File.read("source.js"))
-    # => array of warnings
+Jshintrb.lint(File.read("source.js"))
+# => array of warnings
 
-    Jshintrb.report(File.read("source.js"))
-    # => string
+Jshintrb.report(File.read("source.js"))
+# => string
+```
 
-When initializing jshintrb, you can pass options
+Or you can use it with rake
 
-    Uglifier.new(:undef => true).compile(source)
+```ruby
+require "jshintrb/jshinttask"
+Jshintrb::JshintTask.new :jshint do |t|
+  t.pattern = 'javascript/**/*.js'
+  t.options = :defaults
+end
+```
 
-    # Or
-    Uglifier.compile(source, :undef => true)
+When initializing `Jshintrb`, you can pass options
 
-Available options and their defaults are
+```ruby
+Jshintrb.new(:undef => true).compile(source)
+# Or
+Jshintrb.compile(source, :undef => true)
+```
 
-    {
-      :bitwise => true,
-      :curly => true,
-      :eqeqeq => true,
-      :forin => true,
-      :immed => true,
-      :latedef => true,
-      :newcap => true,
-      :noarg => true,
-      :noempty => true,
-      :nonew => true,
-      :plusplus => true,
-      :regexp => true,
-      :undef => true,
-      :strict => true,
-      :trailing => true,
-      :browser => true
-    }
+[List of all available options](http://www.jshint.com/options/)
+
+If you pass `:defaults` as option, it is the same as if you pass following
+
+```
+{
+  :bitwise => true,
+  :curly => true,
+  :eqeqeq => true,
+  :forin => true,
+  :immed => true,
+  :latedef => true,
+  :newcap => true,
+  :noarg => true,
+  :noempty => true,
+  :nonew => true,
+  :plusplus => true,
+  :regexp => true,
+  :undef => true,
+  :strict => true,
+  :trailing => true,
+  :browser => true
+}
+```
 
 ## TODO
 
- - add rake task which will accept pattern for files
- - add color reporter
  - add more tests
-
+ - add color reporter
+ - add cli

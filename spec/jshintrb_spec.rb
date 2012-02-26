@@ -1,6 +1,10 @@
 # encoding: UTF-8
 require "jshintrb"
 
+def gen_file source, option, value
+  "/*jshint " + option.to_s + ": " + value.to_s + "*/\n" + source
+end
+
 describe "Jshintrb" do
   
   it "support options" do
@@ -28,6 +32,10 @@ describe "Jshintrb" do
       Jshintrb.lint(source, option => true).length.should eq 1
     end
 
+    options.each do |option, source|
+      Jshintrb.lint(gen_file(source, option, false)).length.should eq 0
+      Jshintrb.lint(gen_file(source, option, true)).length.should eq 1
+    end
   end
 
 end
