@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = Jshintrb::VERSION
   s.authors     = ["stereobooster"]
   s.email       = ["stereobooster@gmail.com"]
-  s.homepage    = "https://stereobooster@github.com/stereobooster/jshintrb.git"
+  s.homepage    = "https://github.com/stereobooster/jshintrb"
   s.summary     = %q{Ruby wrapper for JSHint}
   s.description = %q{Ruby wrapper for JSHint. The main difference from jshint it does not depend on Java. Instead, it uses ExecJS}
 
