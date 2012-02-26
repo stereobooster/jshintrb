@@ -69,5 +69,5 @@ If you pass `:defaults` as option, it is the same as if you pass following
 ## TODO
 
  - add more tests
- - add color reporter
- - add cli
+ - add color reporter. Maybe [colorize](https://github.com/fazibear/colorize)
+ - add cli. Support same options as [jshint/node-jshint](https://github.com/jshint/node-jshint/blob/master/lib/cli.js) 
