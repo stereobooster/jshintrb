@@ -1,5 +1,5 @@
 # encoding: UTF-8
-require_relative "../lib/jshintrb"
+require "jshintrb"
 
 describe "Jshintrb" do
   
