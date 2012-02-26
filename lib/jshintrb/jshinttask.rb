@@ -27,11 +27,17 @@ module Jshintrb
     # used, then the list of JavaScritp files is the union of the two.
     attr_accessor :js_files
 
+    attr_accessor :exclude_pattern
+
+    attr_accessor :exclude_js_files
+
     # Defines a new task, using the name +name+.
     def initialize(name=:jshint)
       @name = name
       @pattern = nil
       @js_files = nil
+      @exclude_pattern = nil
+      @exclude_js_files = nil
       @options = nil
       @fail_on_error = true
 
@@ -69,6 +75,8 @@ module Jshintrb
         result = []
         result += js_files.to_a if js_files
         result += FileList[ pattern ].to_a if pattern
+        result -= exclude_js_files.to_a if js_files
+        result -= FileList[ exclude_pattern ].to_a if exclude_pattern
         FileList[result]
     end
   end
