@@ -75,7 +75,7 @@ module Jshintrb
         result = []
         result += js_files.to_a if js_files
         result += FileList[ pattern ].to_a if pattern
-        result -= exclude_js_files.to_a if js_files
+        result -= exclude_js_files.to_a if exclude_js_files
         result -= FileList[ exclude_pattern ].to_a if exclude_pattern
         FileList[result]
     end
