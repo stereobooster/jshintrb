@@ -51,9 +51,9 @@ module Jshintrb
 
       js = []
       if @options.nil? then
-        js << "JSHINT(#{MultiJson.encode(source)});"
+        js << "JSHINT(#{MultiJson.dump(source)});"
       else
-        js << "JSHINT(#{MultiJson.encode(source)}, #{MultiJson.encode(@options)});"
+        js << "JSHINT(#{MultiJson.dump(source)}, #{MultiJson.dump(@options)});"
       end
       js << "return JSHINT.errors;"
 
