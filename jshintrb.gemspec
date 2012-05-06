@@ -11,8 +11,6 @@ Gem::Specification.new do |s|
   s.summary     = %q{Ruby wrapper for JSHint}
   s.description = %q{Ruby wrapper for JSHint. The main difference from jshint gem it does not depend on Java. Instead, it uses ExecJS}
 
-  s.rubyforge_project = "jshintrb"
-
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
@@ -20,6 +18,7 @@ Gem::Specification.new do |s|
 
   # specify any dependencies here; for example:
   s.add_development_dependency "rspec"
+  s.add_development_dependency "submodule"
   s.add_runtime_dependency "rake"
 
   s.add_dependency "multi_json", ">= 1.3"
