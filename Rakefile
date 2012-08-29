@@ -5,8 +5,8 @@ require "bundler/gem_tasks"
 end
 
 require 'submodule'
-class JshintSubmodule  < Submodule::Task
-    def test
+Submodule::Task.new do |t|
+    t.test do
       # sudo apt-get update
       # sudo apt-get install npm
       # sudo npm -g install expresso
@@ -15,12 +15,11 @@ class JshintSubmodule  < Submodule::Task
       sh "#{expresso} tests/regression/*.js"
     end
 
-    def after_pull
+    t.after_pull do
       cp "vendor/jshint/jshint.js", "lib/js/jshint.js"
       sh "git add lib/js/jshint.js"
     end
 end
-JshintSubmodule.new
 
 require "rspec/core/rake_task"
 RSpec::Core::RakeTask.new
