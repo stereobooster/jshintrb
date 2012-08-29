@@ -3,6 +3,8 @@ source "http://rubygems.org"
 # Specify your gem's dependencies in jshintrb.gemspec
 gemspec
 
+gem 'inifile', '~> 1.1.0'
+
 # Depend on defined ExecJS runtime
 execjs_runtimes = {
   "RubyRacer" => "therubyracer",
