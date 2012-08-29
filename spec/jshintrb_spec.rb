@@ -38,4 +38,11 @@ describe "Jshintrb" do
     end
   end
 
+  it "supports globals" do
+    source = "foo();"
+    puts Jshintrb.lint(source, :defaults, [:foo])
+    Jshintrb.lint(source, :defaults, [:foo]).length.should eq 0
+    Jshintrb.lint(source, :defaults).length.should eq 1
+  end
+
 end
