@@ -36,9 +36,9 @@ end
 When initializing `Jshintrb`, you can pass options
 
 ```ruby
-Jshintrb.new(:undef => true).compile(source)
+Jshintrb::Lint.new(:undef => true).lint(source)
 # Or
-Jshintrb.compile(source, :undef => true)
+Jshintrb.lint(source, :undef => true)
 ```
 
 [List of all available options](http://www.jshint.com/options/)

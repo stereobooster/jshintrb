@@ -6,8 +6,8 @@ require "jshintrb/reporter/default"
 
 module Jshintrb
 
-  def self.lint(source, options = nil)
-    Lint.new(options).lint(source)
+  def self.lint(source, options = nil, globals = nil)
+    Lint.new(options, globals).lint(source)
   end
 
   def self.report(source, options = nil, out = nil)

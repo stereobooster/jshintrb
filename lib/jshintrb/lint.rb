@@ -30,7 +30,7 @@ module Jshintrb
 
     SourcePath = File.expand_path("../../js/jshint.js", __FILE__)
 
-    def initialize(options = nil)
+    def initialize(options = nil, globals = nil)
 
       if options == :defaults then
         @options = DEFAULTS.dup
@@ -43,6 +43,8 @@ module Jshintrb
         raise 'Unsupported option for Jshintrb: ' + options.to_s
       end
 
+      @globals = globals
+
       @context = ExecJS.compile(File.open(SourcePath, "r:UTF-8").read)
     end
 
@@ -50,10 +52,13 @@ module Jshintrb
       source = source.respond_to?(:read) ? source.read : source.to_s
 
       js = []
-      if @options.nil? then
+      if @options.nil? and @globals.nil? then
         js << "JSHINT(#{MultiJson.dump(source)});"
-      else
+      elsif @globals.nil? then
         js << "JSHINT(#{MultiJson.dump(source)}, #{MultiJson.dump(@options)});"
+      else
+        globals_hash = Hash[*@globals.product([false]).flatten]
+        js << "JSHINT(#{MultiJson.dump(source)}, #{MultiJson.dump(@options)}, #{MultiJson.dump(globals_hash)});"
       end
       js << "return JSHINT.errors;"
 
