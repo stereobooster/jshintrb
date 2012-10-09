@@ -8,7 +8,7 @@ module Jshintrb
   class Lint
     Error = ExecJS::Error
 
-    # Default options for compilation
+    # Default options for JSHint
     DEFAULTS = {
       :bitwise => true,
       :curly => true,
@@ -30,35 +30,48 @@ module Jshintrb
 
     SourcePath = File.expand_path("../../js/jshint.js", __FILE__)
 
+    # @param [Hash, Symbol, nil] options If you pass :defaults
+    # @param [Array, nil] globals
     def initialize(options = nil, globals = nil)
 
-      if options == :defaults then
-        @options = DEFAULTS.dup
-      elsif options.instance_of? Hash then
-        @options = options.dup
-        # @options = DEFAULTS.merge(options)
+      if options == :defaults
+        @options = MultiJson.dump(DEFAULTS)
+      elsif options.instance_of?(Hash)
+        @options = MultiJson.dump(options)
       elsif options.nil?
         @options = nil
       else
-        raise 'Unsupported option for Jshintrb: ' + options.to_s
+        raise ArgumentError, "Expecting hash or :defaults for options. Instead get #{options}"
       end
 
-      @globals = globals
+      if globals.instance_of?(Array)
+        @globals = Hash[*globals.product([false]).flatten]
+        @globals = MultiJson.dump(@globals)
+      elsif globals.nil?
+        @globals_hash = nil
+      else
+        raise ArgumentError, "Expecting array for globals. Instead get #{globals}"
+      end
 
       @context = ExecJS.compile(File.open(SourcePath, "r:UTF-8").read)
     end
 
+    # @param [IO, String] source
+    # @return [Array] Array of Hashes
     def lint(source)
-      source = source.respond_to?(:read) ? source.read : source.to_s
+      str = source.respond_to?(:read) ? source.read : source.dup
+      raise ArgumentError, "Expecting String or IO for source. Instead get #{source}" unless str.instance_of?(String)
 
+      str = MultiJson.dump(str)
       js = []
-      if @options.nil? and @globals.nil? then
-        js << "JSHINT(#{MultiJson.dump(source)});"
-      elsif @globals.nil? then
-        js << "JSHINT(#{MultiJson.dump(source)}, #{MultiJson.dump(@options)});"
+      if @options.nil? and @globals.nil?
+        js << "JSHINT(#{str});"
+      elsif @globals.nil?
+        js << "JSHINT(#{str}, #{@options});"
+      elsif @options.nil? and !@globals.nil?
+        js << "JSHINT(#{str}, null, #{@globals});"
       else
-        globals_hash = Hash[*@globals.product([false]).flatten]
-        js << "JSHINT(#{MultiJson.dump(source)}, #{MultiJson.dump(@options)}, #{MultiJson.dump(globals_hash)});"
+        js << "JSHINT(#{str}, #{@options}, #{@globals});"
       end
       js << "return JSHINT.errors;"
 

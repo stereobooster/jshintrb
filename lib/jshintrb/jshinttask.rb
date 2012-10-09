@@ -17,6 +17,7 @@ module Jshintrb
     # options
     attr_accessor :options
 
+    # globals
     attr_accessor :globals
 
     # Whether or not to fail Rake when an error occurs (typically when Jshint check fail).
@@ -34,6 +35,8 @@ module Jshintrb
     attr_accessor :exclude_js_files
 
     # Defines a new task, using the name +name+.
+    # 
+    # @param [String, Symbol] name
     def initialize(name=:jshint)
       @name = name
       @pattern = nil
@@ -49,9 +52,9 @@ module Jshintrb
       define
     end
 
-    def define # :nodoc:
+    private
 
-      actual_name = Hash === name ? name.keys.first : name
+    def define # :nodoc:
       unless ::Rake.application.last_comment
         desc "Run JShint"
       end
@@ -63,15 +66,7 @@ module Jshintrb
           end
         end
       end
-
       self
-    end
-
-    def evaluate(o) # :nodoc:
-      case o
-        when Proc then o.call
-        else o
-      end
     end
 
     def js_file_list # :nodoc:

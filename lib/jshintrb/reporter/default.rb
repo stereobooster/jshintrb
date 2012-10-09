@@ -2,27 +2,22 @@ module Jshintrb
   module Reporter
     class Default
 
-      def format errors, file
+      # @param [Array] errors Array of Hashes returned by Jshintrb::Lint.lint
+      # @param [String, nil] file
+      # @return [String]
+      def format (errors, file = nil)
         result = ''
-        indent = ''
-        if file then
-          indent = '  '
-        end
+        indent = file ? '  ' : ''
 
         errors.each do |error|
-          if error.nil? then
-            result += indent + 'fatal error'
+          if error.nil?
+            result += "#{indent} fatal error\n"
           else
-            result += indent + 'line ' + error["line"].to_s + ', col ' +
-              error["character"].to_s + ', ' + error["reason"].to_s + "\n"
+            result += "#{indent} line #{error['line']}, col #{error['character']}, #{error['reason']}\n"
           end
         end
 
-        if file && result.size > 0 then
-          result = 'file: ' + file + "\n" + result
-        end
-
-        result
+        file and result.size > 0 ? "file: #{file}\n#{result}" : result
       end
 
     end

@@ -1,14 +1,13 @@
-# jshintrb
-[![Build Status](https://secure.travis-ci.org/stereobooster/jshintrb.png?branch=master)](http://travis-ci.org/stereobooster/jshintrb)
+# jshintrb [![Build Status](https://secure.travis-ci.org/stereobooster/jshintrb.png?branch=master)](http://travis-ci.org/stereobooster/jshintrb) [![Dependency Status](https://gemnasium.com/stereobooster/jshintrb.png)](https://gemnasium.com/stereobooster/jshintrb) [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/stereobooster/jshintrb)
 
 Ruby wrapper for [JSHint](https://github.com/jshint/jshint/). The main difference from [jshint](https://github.com/liquid/jshint_on_rails) it does not depend on Java. Instead it uses [ExecJS](https://github.com/sstephenson/execjs).
 
 ## Installation
 
 jshintrb is available as ruby gem.
-
-    $ gem install jshintrb
-
+```bash
+$ gem install jshintrb
+```
 Ensure that your environment has a JavaScript interpreter supported by [ExecJS](https://github.com/sstephenson/execjs). Usually, installing therubyracer gem is the best alternative.
 
 ## Usage
@@ -23,7 +22,7 @@ Jshintrb.report(File.read("source.js"))
 # => string
 ```
 
-Or you can use it with rake
+Or you can use it with Rake
 
 ```ruby
 require "jshintrb/jshinttask"
@@ -33,12 +32,12 @@ Jshintrb::JshintTask.new :jshint do |t|
 end
 ```
 
-When initializing `Jshintrb`, you can pass options
+When initializing `Jshintrb`, you can pass options and globals
 
 ```ruby
-Jshintrb::Lint.new(:undef => true).lint(source)
+Jshintrb::Lint.new({:undef => true}, [:foo]).lint(source)
 # Or
-Jshintrb.lint(source, :undef => true)
+Jshintrb.lint(source, {:undef => true}, [:foo])
 ```
 
 [List of all available options](http://www.jshint.com/options/)
@@ -66,8 +65,12 @@ If you pass `:defaults` as option, it is the same as if you pass following
 }
 ```
 
+## Documentation
+
+[rubydoc.info](http://rubydoc.info/find/gems?q=jshintrb)
+
 ## TODO
 
  - add more tests
  - add color reporter. Maybe [colorize](https://github.com/fazibear/colorize)
- - add cli. Support same options as [jshint/node-jshint](https://github.com/jshint/node-jshint/blob/master/lib/cli.js) 
+ - add CLI. Support same options as [jshint/node-jshint](https://github.com/jshint/node-jshint/blob/master/lib/cli.js) 
