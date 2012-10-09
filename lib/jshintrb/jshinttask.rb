@@ -17,6 +17,8 @@ module Jshintrb
     # options
     attr_accessor :options
 
+    attr_accessor :globals
+
     # Whether or not to fail Rake when an error occurs (typically when Jshint check fail).
     # Defaults to true.
     attr_accessor :fail_on_error
@@ -39,6 +41,7 @@ module Jshintrb
       @exclude_pattern = nil
       @exclude_js_files = nil
       @options = nil
+      @globals = nil
       @fail_on_error = true
 
       yield self if block_given?
@@ -54,7 +57,7 @@ module Jshintrb
       end
       task name do
         unless js_file_list.empty?
-          result = Jshintrb::report(js_file_list, @options, STDERR)
+          result = Jshintrb::report(js_file_list, @options, @globals, STDERR)
           if result.size > 0
             abort("JSHint check failed") if fail_on_error
           end

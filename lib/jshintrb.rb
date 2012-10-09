@@ -10,9 +10,9 @@ module Jshintrb
     Lint.new(options, globals).lint(source)
   end
 
-  def self.report(source, options = nil, out = nil)
+  def self.report(source, options = nil, globals = nil, out = nil)
     reporter = Reporter::Default.new
-    linter = Lint.new(options)
+    linter = Lint.new(options, globals)
     report = ''
     if source.is_a?(Array) then
       source.each do |src|
