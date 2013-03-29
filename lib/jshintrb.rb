@@ -6,13 +6,13 @@ require "jshintrb/reporter/default"
 
 module Jshintrb
 
-  def self.lint(source, options = nil, globals = nil)
-    Lint.new(options, globals).lint(source)
+  def self.lint(source, options = nil, globals = nil, jshint = nil)
+    Lint.new(options, globals, jshint).lint(source)
   end
 
-  def self.report(source, options = nil, globals = nil, out = nil)
+  def self.report(source, options = nil, globals = nil, out = nil, jshint = nil)
     reporter = Reporter::Default.new
-    linter = Lint.new(options, globals)
+    linter = Lint.new(options, globals, jshint)
     report = ''
     if source.is_a?(Array) then
       source.each do |src|
