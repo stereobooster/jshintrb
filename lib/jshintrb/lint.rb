@@ -34,6 +34,8 @@ module Jshintrb
 
       if options == :defaults then
         @options = DEFAULTS.dup
+      elsif options == :jshintrc then
+        @options = MultiJson.load(File.read('./.jshintrc'))
       elsif options.instance_of? Hash then
         @options = options.dup
         # @options = DEFAULTS.merge(options)

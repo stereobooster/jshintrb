@@ -6,7 +6,7 @@ def gen_file source, option, value
 end
 
 describe "Jshintrb" do
-  
+
   it "support options" do
     options = {
       :bitwise => "var a = 1|1;",
@@ -42,6 +42,14 @@ describe "Jshintrb" do
     source = "foo();"
     Jshintrb.lint(source, :defaults, [:foo]).length.should eq 0
     Jshintrb.lint(source, :defaults).length.should eq 1
+  end
+
+  it "supports .jshintrc" do
+    basedir = File.join(File.dirname(__FILE__), "fixtures")
+    source = "var hoge;"
+    Dir.chdir basedir do
+      Jshintrb.lint(source, :jshintrc).length.should eq 1
+    end
   end
 
 end

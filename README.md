@@ -66,6 +66,8 @@ If you pass `:defaults` as option, it is the same as if you pass following
 }
 ```
 
+If you pass `:jshintrc` as option, `.jshintrc` file is loaded as option.
+
 ## TODO
 
  - add more tests
