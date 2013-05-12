@@ -57,7 +57,7 @@ module Jshintrb
       elsif @globals.nil? then
         js << "JSHINT(#{MultiJson.dump(source)}, #{MultiJson.dump(@options)});"
       else
-        globals_hash = Hash[*@globals.product([false]).flatten]
+        globals_hash = @globals.is_a?(Hash) ? @globals : Hash[*@globals.product([false]).flatten]
         js << "JSHINT(#{MultiJson.dump(source)}, #{MultiJson.dump(@options)}, #{MultiJson.dump(globals_hash)});"
       end
       js << "return JSHINT.errors;"
