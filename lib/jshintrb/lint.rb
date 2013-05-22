@@ -45,7 +45,7 @@ module Jshintrb
 
       @globals = globals
 
-      @context = ExecJS.compile(File.open(SourcePath, "r:UTF-8").read)
+      @context = ExecJS.compile("var window = {};\n" + File.open(SourcePath, "r:UTF-8").read)
     end
 
     def lint(source)

@@ -4,19 +4,29 @@ require "bundler/gem_tasks"
   Rake::Task[task_name].prerequisites << :spec
 end
 
+require "multi_json"
+
+def jshint_version
+  package = File.expand_path("../vendor/jshint/package.json", __FILE__)
+  MultiJson.load(File.open(package, "r:UTF-8").read)["version"]
+end
+
+task :jshint_version do
+  p jshint_version
+end
+
 require 'submodule'
 Submodule::Task.new do |t|
     t.test do
-      # sudo apt-get update
-      # sudo apt-get install npm
-      # sudo npm -g install expresso
-      expresso = "/usr/bin/expresso"
-      sh "#{expresso} tests/unit/*.js"
-      sh "#{expresso} tests/regression/*.js"
+      sh "npm i"
+      # sh "npm test"
+      # sh "npm build"
+      sh "nodejs make.js test"
+      sh "nodejs make.js build"
     end
 
     t.after_pull do
-      cp "vendor/jshint/jshint.js", "lib/js/jshint.js"
+      cp "vendor/jshint/dist/jshint-#{jshint_version}.js", "lib/js/jshint.js"
       sh "git add lib/js/jshint.js"
     end
 end
