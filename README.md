@@ -5,11 +5,11 @@ Ruby wrapper for [JSHint](https://github.com/jshint/jshint/). The main differenc
 
 ## Installation
 
-jshintrb is available as ruby gem.
+`jshintrb` is available as ruby gem.
 
     $ gem install jshintrb
 
-Ensure that your environment has a JavaScript interpreter supported by [ExecJS](https://github.com/sstephenson/execjs). Usually, installing therubyracer gem is the best alternative.
+Ensure that your environment has a JavaScript interpreter supported by [ExecJS](https://github.com/sstephenson/execjs). Usually, installing `therubyracer` gem is the best alternative.
 
 ## Usage
 
@@ -68,10 +68,6 @@ If you pass `:defaults` as option, it is the same as if you pass following
 
 ## TODO
 
- - update to the latest jshint. Need to resolve problems with CommonJS ([see](https://github.com/jshint/jshint/issues/739)):
-   - `require` can be resolved with `stitch-rb`
-   - `underscore`
-   - [CommonJS `event` module](http://wiki.commonjs.org/wiki/Events/A)
  - add more tests
  - add color reporter. Maybe [colorize](https://github.com/fazibear/colorize)
  - add cli. Support same options as [jshint/node-jshint](https://github.com/jshint/node-jshint/blob/master/lib/cli.js) 
