@@ -2,7 +2,7 @@ module Jshintrb
   module Reporter
     class Default
 
-      def format errors, file
+      def format errors, file = nil
         result = ''
         indent = ''
         if file then
