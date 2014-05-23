@@ -6,7 +6,7 @@ def gen_file source, option, value
 end
 
 describe "Jshintrb" do
-  
+
   it "support options" do
     options = {
       :bitwise => "var a = 1|1;",
@@ -42,6 +42,12 @@ describe "Jshintrb" do
     source = "foo();"
     Jshintrb.lint(source, :defaults, [:foo]).length.should eq 0
     Jshintrb.lint(source, :defaults).length.should eq 1
+  end
+
+  describe "Jshintrb#report" do
+    it "accepts a single argument" do
+      expect{ Jshintrb.report('var working = false;') }.to_not raise_error
+    end
   end
 
 end
