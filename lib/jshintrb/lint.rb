@@ -35,6 +35,7 @@ module Jshintrb
       if options == :defaults then
         @options = DEFAULTS.dup
       elsif options == :jshintrc then
+        raise '`.jshintrc` is not exist on current working directory.' unless File.exist?('./.jshintrc')
         @options = MultiJson.load(File.read('./.jshintrc'))
       elsif options.instance_of? Hash then
         @options = options.dup
