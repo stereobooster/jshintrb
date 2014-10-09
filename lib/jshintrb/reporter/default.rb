@@ -6,7 +6,7 @@ module Jshintrb
 
         # Skip strange errors
         errors.delete_if do |err|
-          err['reason'] =~ /^Redefinition of / || err['reason'] =~ /Expected '{' and instead saw/
+          err && (err['reason'] =~ /^Redefinition of / || err['reason'] =~ /Expected '{' and instead saw/)
         end
         return '' if errors.size == 0
 
