@@ -41,7 +41,7 @@ Jshintrb::Lint.new(:undef => true).lint(source)
 Jshintrb.lint(source, :undef => true)
 ```
 
-[List of all available options](http://www.jshint.com/options/)
+[List of all available options](http://www.jshint.com/docs/options/)
 
 If you pass `:defaults` as option, it is the same as if you pass following
 
