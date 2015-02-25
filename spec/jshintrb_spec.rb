@@ -44,6 +44,14 @@ describe "Jshintrb" do
     Jshintrb.lint(source, :defaults).length.should eq 1
   end
 
+  it "supports .jshintrc" do
+    basedir = File.join(File.dirname(__FILE__), "fixtures")
+    source = "var hoge;"
+    Dir.chdir basedir do
+      Jshintrb.lint(source, :jshintrc).length.should eq 1
+    end
+  end
+
   describe "Jshintrb#report" do
     it "accepts a single argument" do
       expect{ Jshintrb.report('var working = false;') }.to_not raise_error

@@ -18,7 +18,7 @@ module Jshintrb
       source.each do |src|
         if !src.is_a?(String) then
           p src.to_s
-          raise ('Expected array of strings. Instead get ' + src.class.to_s)
+          raise ArgumentError, 'Expected array of strings. Instead get ' + src.class.to_s
         end
         errors = linter.lint(File.read(src))
         rep = reporter.format errors, src
