@@ -19,14 +19,12 @@ require 'submodule'
 Submodule::Task.new do |t|
     t.test do
       sh "npm i"
-      # sh "npm test"
-      # sh "npm build"
-      sh "nodejs make.js test"
-      sh "nodejs make.js build"
+      sh "npm test"
+      # sh "node bin/build"
     end
 
     t.after_pull do
-      cp "vendor/jshint/dist/jshint-#{jshint_version}.js", "lib/js/jshint.js"
+      cp "vendor/jshint/dist/jshint.js", "lib/js/jshint.js"
       sh "git add lib/js/jshint.js"
     end
 end
