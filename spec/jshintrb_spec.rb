@@ -52,6 +52,14 @@ describe "Jshintrb" do
     end
   end
 
+  it "supports globals from .jshintrc" do
+    basedir = File.join(File.dirname(__FILE__), "fixtures")
+    source = "foo();"
+    Dir.chdir basedir do
+      Jshintrb.lint(source, :jshintrc).length.should eq 0
+    end
+  end
+
   describe "Jshintrb#report" do
     it "accepts a single argument" do
       expect{ Jshintrb.report('var working = false;') }.to_not raise_error
