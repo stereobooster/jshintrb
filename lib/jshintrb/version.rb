@@ -1,4 +1,4 @@
 module Jshintrb
-  VERSION = "0.2.4"
-  SUBMODULE = "d459a40914a26c566ba82bb145e97573ff123879"
+  VERSION = "0.2.6"
+  SUBMODULE = "bfcc86d6e51f53ae1e05cfdd33618e9bc0a9a957"
 end
