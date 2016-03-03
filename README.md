@@ -61,7 +61,6 @@ If you pass `:defaults` as option, it is the same as if you pass following
   :regexp => true,
   :undef => true,
   :strict => true,
-  :trailing => true,
   :browser => true
 }
 ```

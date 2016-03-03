@@ -24,7 +24,6 @@ module Jshintrb
       :regexp => true,
       :undef => true,
       :strict => true,
-      :trailing => true,
       :browser => true
     }
 

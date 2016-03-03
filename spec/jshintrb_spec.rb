@@ -23,7 +23,6 @@ describe "Jshintrb" do
       # :regexp => true,
       :undef => "if (a == 'a') { var b = 'b'; }"
       # :strict => true,
-      # :trailing => true,
       # :browser => true
     }
 
