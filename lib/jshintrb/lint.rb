@@ -21,10 +21,8 @@ module Jshintrb
       :noempty => true,
       :nonew => true,
       :plusplus => true,
-      :regexp => true,
       :undef => true,
       :strict => true,
-      :trailing => true,
       :browser => true
     }
 

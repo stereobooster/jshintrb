@@ -20,10 +20,8 @@ describe "Jshintrb" do
       # :noempty => true,
       # :nonew => true,
       # :plusplus => true,
-      # :regexp => true,
       :undef => "if (a == 'a') { var b = 'b'; }"
       # :strict => true,
-      # :trailing => true,
       # :browser => true
     }
 
