@@ -58,7 +58,6 @@ If you pass `:defaults` as option, it is the same as if you pass following
   :noempty => true,
   :nonew => true,
   :plusplus => true,
-  :regexp => true,
   :undef => true,
   :strict => true,
   :browser => true
