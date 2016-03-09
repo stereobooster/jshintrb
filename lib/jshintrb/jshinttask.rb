@@ -52,7 +52,7 @@ module Jshintrb
     def define # :nodoc:
 
       actual_name = Hash === name ? name.keys.first : name
-      unless ::Rake.application.last_description
+      unless ::Rake.application.last_description || ::Rake.application.last_comment
         desc "Run JShint"
       end
       task name do
